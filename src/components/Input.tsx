@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from "styled-components";
 
 const InputStyled = styled.input`
@@ -12,7 +11,7 @@ const InputStyled = styled.input`
   color: #d0d0d4; 
 }
 `;
-const ContainerStyled = styled.div`
+const ContainerStyled = styled.div<{width: string}>`
     display: flex;
     width: ${({width}) => width || '100%'};
     flex-direction: row;
@@ -27,9 +26,16 @@ const IconStyled = styled.img`
     width: 40px;
     height: 40px;
     padding: 10px;
-    filter: brightness(0) invert(1);
 `;
-const Input = ({logo, text, click, change, width}) => {
+
+interface InputProps {
+    logo: string;
+    text: string;
+    click: () => void;
+    change: () => void;
+    width: string;
+}
+const Input = ({logo, text, click, change, width}: InputProps) => {
     console.log(logo)
     return (
         <ContainerStyled width={width}>

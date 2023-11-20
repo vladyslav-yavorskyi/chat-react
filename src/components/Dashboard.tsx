@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from "styled-components";
 
 const Dashboard = () => {
@@ -16,7 +15,7 @@ const DashboardDiv = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 20vw
+    width: 10vw
 `
 
 export default Dashboard;
