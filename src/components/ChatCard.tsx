@@ -1,15 +1,37 @@
 import styled from "styled-components";
 
+const ChatCard = ({width}: {width: string}) => {
+    return (
+        <CardWrapper width={width}>
+            <CardHeader>
+                <CardImage src="https://picsum.photos/200" alt="user"/>
+                <CardTitle>Donald Johnson</CardTitle>
+            </CardHeader>
+            <CardBody>
+                <LastMessage>Hey, how are you? How's your mom...</LastMessage>
+                <UnreadMessages>3</UnreadMessages>
+            </CardBody>
+        </CardWrapper>
+    );
+};
 
 const CardWrapper  = styled.div<{width: string}>`
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     width: ${({width}) => width || '100%'};
+    height: 300px;
     border-radius: 10px;
     padding: 10px;
     margin: 10px;
+    cursor: pointer;
+    
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  
+    transition: transform 0.3s ease-in-out; 
+
+    &:hover {
+      transform: scale(1.05); 
+    }
     `;
 
 const CardHeader = styled.div`
@@ -38,6 +60,7 @@ const CardBody = styled.div`
 
 const LastMessage = styled.p`
   color: #292c3e;
+  font-size: 14px;
 `
 
 const UnreadMessages = styled.div`
@@ -53,19 +76,5 @@ const UnreadMessages = styled.div`
 ` ;
 
 
-const ChatCard = ({width}: {width: string}) => {
-    return (
-        <CardWrapper width={width}>
-            <CardHeader>
-                <CardImage src="https://picsum.photos/200" alt="user"/>
-                <CardTitle>Donald Johnson</CardTitle>
-            </CardHeader>
-            <CardBody>
-                <LastMessage>Hey, how are you?</LastMessage>
-                <UnreadMessages>3</UnreadMessages>
-            </CardBody>
-        </CardWrapper>
-    );
-};
 
 export default ChatCard;
