@@ -2,6 +2,7 @@ import './App.css'
 import Dashboard from "./components/Dashboard.tsx";
 import Chats from "./components/Chats.tsx";
 import styled from "styled-components";
+import MainChat from "./components/MainChat.tsx";
 
 
 const Container = styled.div`
@@ -19,6 +20,7 @@ function App() {
     <Container>
         <Dashboard/>
         <Chats/>
+        <MainChat/>
     </Container>
   )
 }

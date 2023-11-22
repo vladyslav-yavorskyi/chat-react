@@ -1,11 +1,18 @@
 import styled from "styled-components";
+import ImageProfile from "./ImageProfile.tsx";
+import Status from "./Status.tsx";
+import Flex from "./Flex.tsx";
 
 const ChatCard = ({width}: {width: string}) => {
     return (
         <CardWrapper width={width}>
             <CardHeader>
-                <CardImage src="https://picsum.photos/200" alt="user"/>
-                <CardTitle>Donald Johnson</CardTitle>
+                <ImageProfile imageUrl={"https://picsum.photos/200"} active={false} size={"50px"}/>
+                <Flex flexDirection={'column'}>
+                    <CardTitle>Donald Johnson</CardTitle>
+                    <Status text={'Offline'}/>
+                </Flex>
+
             </CardHeader>
             <CardBody>
                 <LastMessage>Hey, how are you? How's your mom...</LastMessage>
@@ -41,14 +48,9 @@ const CardHeader = styled.div`
     `;
 const CardTitle = styled.h3`
   color: #292c3e;
-`
-
-const CardImage = styled.img`
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
-`
+  font-size: 20px;
+  margin-left: 10px;
+`;
 
 const CardBody = styled.div`
     display: flex;

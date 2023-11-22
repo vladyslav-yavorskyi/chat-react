@@ -9,11 +9,12 @@ import {
     faPaperPlane,
     faUserGroup
 } from "@fortawesome/free-solid-svg-icons";
+import ImageProfile from "./ImageProfile.tsx";
 
 const Dashboard = () => {
     return (
         <DashboardDiv>
-            <Profile  src="https://picsum.photos/200" alt="user"/>
+            <ImageProfile imageUrl={"https://picsum.photos/200"} active={true} size={'40px'}/>
             <NavButtons>
                 <StyledIcon icon={faHouse}/>
                 <StyledIcon icon={faPaperPlane}/>
@@ -36,14 +37,6 @@ const DashboardDiv = styled.div`
   width: 5vw;
   color: #ffffff;
   background-color: #262626;
-`
-
-const Profile = styled.img`
-    margin-top: 30px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-
 `
 
 const NavButtons = styled.div`
