@@ -14,9 +14,10 @@ const MainChat = () => {
 };
 
 const ChatWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 75vw;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 75vw;
 `;
 
 export default MainChat;

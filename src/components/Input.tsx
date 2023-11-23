@@ -7,12 +7,11 @@ interface InputProps {
     text: string;
     click: () => void;
     change: () => void;
-    width: string;
+    width?: string;
 }
 const Input = ({logo, text, click, change, width}: InputProps) => {
-    console.log(logo)
     return (
-        <ContainerStyled width={width}>
+        <ContainerStyled width={width as string}>
             <IconStyled onClick={() => click()} src={logo} alt="icon" />
             <InputStyled as="input" onChange={() => change()} placeholder={text} />
         </ContainerStyled>
@@ -35,10 +34,10 @@ const ContainerStyled = styled.div<{width: string}>`
     display: flex;
     width: ${({width}) => width || '100%'};
     flex-direction: row;
-    justify-content: center;
     align-items: center;
     background: #f8f7f7;
     border-radius: 20px;
+    padding-left: 30px;
     border: none;
 `;
 
