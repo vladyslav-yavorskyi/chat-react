@@ -1,0 +1,52 @@
+[
+  {
+    "sender": "You",
+    "message": "Hey, how's it going?",
+    "time": "2023-11-20T10:30:00"
+  },
+  {
+    "sender": "Someone Else",
+    "message": "Hi! I'm good, thanks. How about you?",
+    "time": "2023-11-20T10:35:00"
+  },
+  {
+    "sender": "You",
+    "message": "Not bad, just working on some projects. What about you?",
+    "time": "2023-11-20T10:40:00"
+  },
+  {
+    "sender": "Someone Else",
+    "message": "I'm busy too, but things are going well. Any exciting projects?",
+    "time": "2023-11-20T10:45:00"
+  },
+  {
+    "sender": "You",
+    "message": "Yeah, I'm working on a new website. It's challenging but fun!",
+    "time": "2023-11-20T10:50:00"
+  },
+  {
+    "sender": "Someone Else",
+    "message": "That sounds great! What's it about?",
+    "time": "2023-11-20T10:55:00"
+  },
+  {
+    "sender": "You",
+    "message": "It's a personal blog where I share tech tips and experiences.",
+    "time": "2023-11-20T11:00:00"
+  },
+  {
+    "sender": "Someone Else",
+    "message": "Nice! I'll definitely check it out. Let me know when it's live.",
+    "time": "2023-11-20T11:05:00"
+  },
+  {
+    "sender": "You",
+    "message": "Will do! Thanks. How's your day going?",
+    "time": "2023-11-20T11:10:00"
+  },
+  {
+    "sender": "Someone Else",
+    "message": "It's been good so far. Just the usual stuff. How about yours?",
+    "time": "2023-11-20T11:15:00"
+  }
+]
