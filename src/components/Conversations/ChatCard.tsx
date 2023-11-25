@@ -2,17 +2,25 @@ import styled from "styled-components";
 import ImageProfile from "../StyledComponents/ImageProfile.tsx";
 import Status from "../StyledComponents/Status.tsx";
 import Flex from "../StyledComponents/Flex.tsx";
+import {IUser} from "../GoogleButton/GoogleSignInButton.tsx";
+import {useCurrentConversation} from "../../context/CurrentConversationContext.tsx";
 
-const ChatCard = ({width}: {width: string}) => {
+const ChatCard = ({width, user}: {width: string, user: IUser}) => {
+
+    const { dispatch} = useCurrentConversation();
+
+    const handleClick = () => {
+        dispatch({type: 'SET_CONVERSATION', payload: {id: user.id}})
+    }
+
     return (
-        <CardWrapper width={width}>
+        <CardWrapper width={width} onClick={() => handleClick()}>
             <CardHeader>
-                <ImageProfile imageUrl={"https://picsum.photos/200"} active={false} size={"50px"}/>
+                <ImageProfile imageUrl={user.photoUrl} active={false} size={"50px"}/>
                 <Flex flexDirection={'column'}>
-                    <CardTitle>Donald Johnson</CardTitle>
+                    <CardTitle>{user.name}</CardTitle>
                     <Status text={'Offline'}/>
                 </Flex>
-
             </CardHeader>
             <CardBody>
                 <LastMessage>Hey, how are you? How's your mom...</LastMessage>

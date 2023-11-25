@@ -32,8 +32,8 @@ const ProfileImage = styled.img`
 
 const StatusIndicator = styled.div<{active: boolean}>`
     position: absolute;
-    top: 2px;
-    left: 2px;
+    top: 2.5px;
+    left: 2.5px;
     width: 10px;
     height: 10px;
     background-color: ${({active}) => active ? '#44d6b5' : '#ccc'};

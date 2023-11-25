@@ -2,14 +2,24 @@ import styled from "styled-components";
 import HeaderChat from "./HeaderChat.tsx";
 import BodyChat from "./BodyChat.tsx";
 import FooterChat from "./FooterChat.tsx";
+import {useCurrentConversation} from "../../context/CurrentConversationContext.tsx";
 
 const MainChat = () => {
+    const {state} = useCurrentConversation();
+
     return (
-        <ChatWrapper>
-            <HeaderChat />
-            <BodyChat/>
-            <FooterChat/>
-        </ChatWrapper>
+        <>
+            {state.id ? (
+                <ChatWrapper>
+                    <HeaderChat />
+                    <BodyChat />
+                    <FooterChat />
+                </ChatWrapper>
+            ) : (
+                <p>choose conversation</p>
+            )}
+        </>
+
     );
 };
 

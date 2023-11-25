@@ -14,6 +14,7 @@ import {useFirebase} from "../../context/FirebaseContext.tsx";
 
 const Dashboard = () => {
     const firebase = useFirebase();
+    console.log(firebase.user)
     return (
         <DashboardDiv>
             <ImageProfile imageUrl={firebase.user?.photoURL} active={true} size={'40px'}/>

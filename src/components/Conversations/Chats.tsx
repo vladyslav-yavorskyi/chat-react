@@ -2,8 +2,40 @@ import Input from "../StyledComponents/Input.tsx";
 import ChatCard from "./ChatCard.tsx";
 import styled from "styled-components";
 import Flex from "../StyledComponents/Flex.tsx";
+import { collection, getDocs } from 'firebase/firestore';
+import {useEffect, useState} from "react";
+import {db} from "../../firebase/firestore.ts";
+import {IUser} from "../GoogleButton/GoogleSignInButton.tsx";
+import {useFirebase} from "../../context/FirebaseContext.tsx";
 
 const Chats = () => {
+
+    const [users, setUsers] = useState<IUser[]>([]);
+    const {user} = useFirebase();
+    const getAllUsers = async () => {
+        const usersCollection = collection(db, 'users');
+
+        try {
+            const querySnapshot = await getDocs(usersCollection);
+            const users = querySnapshot.docs
+                .filter(doc => doc.id !== user?.uid)
+                .map(doc => ({
+                    id: doc.id,
+                    name: doc.data().name,
+                    email: doc.data().email,
+                    photoUrl: doc.data().photoUrl
+                }));
+            setUsers(users);
+            console.log('All Users:', users);
+            console.log(user?.uid)
+        } catch (error) {
+            console.error('Error retrieving users from Firestore: ', error);
+        }
+    };
+
+    useEffect(() => {
+        getAllUsers();
+    }, []);
     return (
         <ChatsWrapper>
             <Input text={"Enter for search..."} width={"25vw"} logo={'src/assets/iconsearch.svg'}
@@ -16,7 +48,9 @@ const Chats = () => {
                 </Flex>
             </ChatSelectorContainer>
             <ChatCardWrapper>
-                {Array(6).fill(0).map((_, i) => <ChatCard width={'25vw'} key={i} />)}
+                {users.map(user => (
+                    <ChatCard key={user.id} width={'25vw'} user={user} />
+                ))}
             </ChatCardWrapper>
         </ChatsWrapper>
     );

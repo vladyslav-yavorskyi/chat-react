@@ -6,11 +6,11 @@ import {useFirebase} from "../context/FirebaseContext.tsx";
 
 const SignIn = () => {
 
-    const {user} = useFirebase();
+    const {isSignedIn} = useFirebase();
 
     return (
         <>
-            {user ? (<ChatRoom/>) : <GoogleSignInButton/>}
+            {isSignedIn ? (<ChatRoom/>) : <GoogleSignInButton/>}
         </>
     );
 
