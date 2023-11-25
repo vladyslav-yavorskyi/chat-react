@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {useEffect, useState} from "react";
-import Message from "./Message.tsx";
-import Conversation from "../data/conversation.json"
+import Message from "../StyledComponents/Message.tsx";
+import Conversation from "../../data/conversation.json"
 export interface IMessage {
     sender: string;
     message: string;

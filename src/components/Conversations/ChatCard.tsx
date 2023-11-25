@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import ImageProfile from "./ImageProfile.tsx";
-import Status from "./Status.tsx";
-import Flex from "./Flex.tsx";
+import ImageProfile from "../StyledComponents/ImageProfile.tsx";
+import Status from "../StyledComponents/Status.tsx";
+import Flex from "../StyledComponents/Flex.tsx";
 
 const ChatCard = ({width}: {width: string}) => {
     return (

@@ -1,5 +1,5 @@
-import Flex from "./Flex.tsx";
-import Input from "./Input.tsx";
+import Flex from "../StyledComponents/Flex.tsx";
+import Input from "../StyledComponents/Input.tsx";
 import styled from "styled-components";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faIcons} from "@fortawesome/free-solid-svg-icons/faIcons";

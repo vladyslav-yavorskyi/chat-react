@@ -1,7 +1,7 @@
-import Input from "./Input.tsx";
+import Input from "../StyledComponents/Input.tsx";
 import ChatCard from "./ChatCard.tsx";
 import styled from "styled-components";
-import Flex from "./Flex.tsx";
+import Flex from "../StyledComponents/Flex.tsx";
 
 const Chats = () => {
     return (

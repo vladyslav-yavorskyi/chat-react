@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface ImageProfileProps {
-    imageUrl: string;
+    imageUrl: string | undefined | null;
     active: boolean;
     size: string;
 }
@@ -9,7 +9,7 @@ const ImageProfile = ({imageUrl, active, size}: ImageProfileProps) => {
     return (
         <ProfileContainer size={size}>
             <StatusIndicator active={active} />
-            <ProfileImage src={imageUrl} alt="Profile" />
+            <ProfileImage src={imageUrl as string} alt="Profile" />
         </ProfileContainer>
     );
 };

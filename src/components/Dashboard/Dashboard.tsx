@@ -9,12 +9,14 @@ import {
     faPaperPlane,
     faUserGroup
 } from "@fortawesome/free-solid-svg-icons";
-import ImageProfile from "./ImageProfile.tsx";
+import ImageProfile from "../StyledComponents/ImageProfile.tsx";
+import {useFirebase} from "../../context/FirebaseContext.tsx";
 
 const Dashboard = () => {
+    const firebase = useFirebase();
     return (
         <DashboardDiv>
-            <ImageProfile imageUrl={"https://picsum.photos/200"} active={true} size={'40px'}/>
+            <ImageProfile imageUrl={firebase.user?.photoURL} active={true} size={'40px'}/>
             <NavButtons>
                 <StyledIcon icon={faHouse}/>
                 <StyledIcon icon={faPaperPlane}/>

@@ -1,4 +1,4 @@
-import {IMessage} from "./BodyChat.tsx";
+import {IMessage} from "../Chat/BodyChat.tsx";
 import styled from "styled-components";
 import Flex from "./Flex.tsx";
 
@@ -14,6 +14,7 @@ const Message = ({data}: { data: IMessage }) => {
 
 const MessageWrapper = styled(Flex)<{ sender: string }>`
     align-self: ${({sender}) => sender === 'You' ? 'flex-end' : 'flex-start'};
+    
 `;
 
 const MessageStyle = styled.div<{sender: string}>`

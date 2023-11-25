@@ -1,27 +1,20 @@
 import './App.css'
-import Dashboard from "./components/Dashboard.tsx";
-import Chats from "./components/Chats.tsx";
-import styled from "styled-components";
-import MainChat from "./components/MainChat.tsx";
-
-
-const Container = styled.div`
-
-    display: flex;
-    flex-direction: row;
-    width: 100vw;
-    height: 100vh;
-
-`
+import SignIn from "./pages/SignIn.tsx";
+import ChatRoom from "./pages/ChatRoom.tsx";
+import {FirebaseProvider} from "./context/FirebaseContext.tsx";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
 
-  return (
-    <Container>
-        <Dashboard/>
-        <Chats/>
-        <MainChat/>
-    </Container>
+    return (
+        <FirebaseProvider>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<SignIn />} />
+                    <Route path="/home" element={<ChatRoom/>} />
+                </Routes>
+            </Router>
+        </FirebaseProvider>
   )
 }
 

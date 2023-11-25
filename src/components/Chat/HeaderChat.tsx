@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import Flex from "./Flex.tsx";
-import ImageProfile from "./ImageProfile.tsx";
+import Flex from "../StyledComponents/Flex.tsx";
+import ImageProfile from "../StyledComponents/ImageProfile.tsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEllipsis, faPhone, faVideo} from "@fortawesome/free-solid-svg-icons";
-import Status from "./Status.tsx";
+import Status from "../StyledComponents/Status.tsx";
 
 
 
