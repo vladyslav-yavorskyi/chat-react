@@ -42,7 +42,7 @@ const Chats = () => {
                    change={() => null} click={() => null}/>
             <ChatSelectorContainer>
                 <Text>Sort By: </Text>
-                <Flex flexDirection={'row'} alignItems={"center"}>
+                <Flex $flexDirection={'row'} $alignItems={"center"}>
                     <Text>Add New </Text>
                     <AddButton>+</AddButton>
                 </Flex>

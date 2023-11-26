@@ -17,7 +17,7 @@ const ChatCard = ({width, user}: {width: string, user: IUser}) => {
         <CardWrapper width={width} onClick={() => handleClick()}>
             <CardHeader>
                 <ImageProfile imageUrl={user.photoUrl} active={false} size={"50px"}/>
-                <Flex flexDirection={'column'}>
+                <Flex $flexDirection={'column'}>
                     <CardTitle>{user.name}</CardTitle>
                     <Status text={'Offline'}/>
                 </Flex>

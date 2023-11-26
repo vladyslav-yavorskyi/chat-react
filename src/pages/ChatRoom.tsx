@@ -6,11 +6,10 @@ import {useFirebase} from "../context/FirebaseContext.tsx";
 
 const ChatRoom = () => {
 
-    const {pending} = useFirebase();
-    console.log(pending, 'pending chatroom')
+    const {auth} = useFirebase();
     return (
         <>
-            {!pending ? (
+            {auth.currentUser ? (
                 <>
                     <Container>
                         <Dashboard/>

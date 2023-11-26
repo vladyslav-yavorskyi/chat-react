@@ -8,7 +8,7 @@ interface ImageProfileProps {
 const ImageProfile = ({imageUrl, active, size}: ImageProfileProps) => {
     return (
         <ProfileContainer size={size}>
-            <StatusIndicator active={active} />
+            <StatusIndicator $status={active} />
             <ProfileImage src={imageUrl as string} alt="Profile" />
         </ProfileContainer>
     );
@@ -30,13 +30,13 @@ const ProfileImage = styled.img`
     border-radius: 50%;
 `
 
-const StatusIndicator = styled.div<{active: boolean}>`
+const StatusIndicator = styled.div<{$status: boolean}>`
     position: absolute;
     top: 2.5px;
     left: 2.5px;
     width: 10px;
     height: 10px;
-    background-color: ${({active}) => active ? '#44d6b5' : '#ccc'};
+    background-color: ${({$status}) => $status ? '#44d6b5' : '#ccc'};
     border-radius: 50%;
     border: 2px solid transparent;
     box-shadow: 0 0 0 2px #fff;

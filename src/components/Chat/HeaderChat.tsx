@@ -45,10 +45,10 @@ const HeaderChat = () => {
 
 
     return (
-        <Flex justifyContent={"space-between"} alignItems={"center"} margin={'10px'}>
-            <Flex flexDirection={"row"} justifyContent={"center"} alignItems={"center"}>
+        <Flex $justifyContent={"space-between"} $alignItems={"center"} $margin={'10px'}>
+            <Flex $flexDirection={"row"} $justifyContent={"center"} $alignItems={"center"}>
                 <ImageProfile imageUrl={currentUser?.photoUrl} active={true} size={"50px"}/>
-                <Flex flexDirection={"column"}>
+                <Flex $flexDirection={"column"}>
                     <UserName>{currentUser?.name}</UserName>
                     <Status text={'Online'}/>
                 </Flex>

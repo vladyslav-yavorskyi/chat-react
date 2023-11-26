@@ -6,7 +6,7 @@ import {faIcons} from "@fortawesome/free-solid-svg-icons/faIcons";
 
 const FooterChat = () => {
     return (
-        <Flex justifyContent={"space-between"} alignItems={"center"} margin={'10px'}>
+        <Flex $justifyContent={"space-between"} $alignItems={"center"} $margin={'10px'}>
             <Input text={"Type a message..."} logo={'src/assets/paperclip.svg'}
                    change={() => null} click={() => null}/>
 
