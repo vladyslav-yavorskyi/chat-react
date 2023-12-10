@@ -3,6 +3,7 @@ import Chats from "../components/Conversations/Chats.tsx";
 import MainChat from "../components/Chat/MainChat.tsx";
 import styled from "styled-components";
 import {useFirebase} from "../context/FirebaseContext.tsx";
+import SearchUserModal from "../components/Modal/SearchUserModal.tsx";
 
 const ChatRoom = () => {
 
@@ -16,6 +17,7 @@ const ChatRoom = () => {
                         <Chats/>
                         <MainChat/>
                     </Container>
+                    <SearchUserModal />
                 </>
             ) : (
                 <p>Loading...</p>

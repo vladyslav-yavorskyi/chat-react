@@ -1,32 +1,28 @@
 import styled from "styled-components";
 import {useEffect, useState} from "react";
 import Message from "../StyledComponents/Message.tsx";
-import Conversation from "../../data/conversation.json"
+import {useCurrentConversation} from "../../context/CurrentConversationContext.tsx";
+import {collection,  onSnapshot} from "firebase/firestore";
+import {db} from "../../firebase/firestore.ts";
 export interface IMessage {
+    id: string;
     sender: string;
-    message: string;
+    text: string;
     time: string;
 }
 const BodyChat = () => {
 
     const [messages, setMessages] = useState<IMessage[]>([]);
+    const {state} = useCurrentConversation();
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                // const response = await fetch('../data/conversation.json');
-                // console.log(response.json())
-                //
-                // const data = await response.json();
-                // console.log(data)
-                // setMessages(data)
-                setMessages(Conversation as IMessage[])
-            } catch (e) {
-                console.log(e);
-            }
-        }
-        fetchData();
-    }, []);
+        const unsubscribe = onSnapshot(collection(db, 'conversations', state.chat?.id as string, 'messages'), (snapshot) => {
+            const messages = snapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
+            console.log(messages)
+            setMessages(messages as IMessage[]);
+        });
+        return () => unsubscribe();
+    }, [state.chat?.id]);
 
     return (
         <BodyWrapper>

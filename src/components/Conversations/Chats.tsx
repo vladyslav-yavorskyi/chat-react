@@ -2,40 +2,32 @@ import Input from "../StyledComponents/Input.tsx";
 import ChatCard from "./ChatCard.tsx";
 import styled from "styled-components";
 import Flex from "../StyledComponents/Flex.tsx";
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 import {useEffect, useState} from "react";
 import {db} from "../../firebase/firestore.ts";
-import {IUser} from "../GoogleButton/GoogleSignInButton.tsx";
 import {useFirebase} from "../../context/FirebaseContext.tsx";
+import {useSearch} from "../../context/ModalContext.tsx";
+
+export interface IChat {
+    id?: string;
+    participants: string[];
+
+}
 
 const Chats = () => {
 
-    const [users, setUsers] = useState<IUser[]>([]);
+    const [chats, setChats] = useState<IChat[]>([]);
     const {user} = useFirebase();
-    const getAllUsers = async () => {
-        const usersCollection = collection(db, 'users');
+    const {setIsOpen} = useSearch();
 
-        try {
-            const querySnapshot = await getDocs(usersCollection);
-            const users = querySnapshot.docs
-                .filter(doc => doc.id !== user?.uid)
-                .map(doc => ({
-                    id: doc.id,
-                    name: doc.data().name,
-                    email: doc.data().email,
-                    photoUrl: doc.data().photoUrl
-                }));
-            setUsers(users);
-            console.log('All Users:', users);
-            console.log(user?.uid)
-        } catch (error) {
-            console.error('Error retrieving users from Firestore: ', error);
-        }
-    };
 
     useEffect(() => {
-        getAllUsers();
-    }, []);
+        const unsubscribe = onSnapshot(collection(db, 'conversations'), (snapshot) => {
+            const conversations = snapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
+            setChats(conversations as IChat[]);
+        });
+        return () => unsubscribe();
+    }, [user?.uid]);
     return (
         <ChatsWrapper>
             <Input text={"Enter for search..."} width={"25vw"} logo={'src/assets/iconsearch.svg'}
@@ -44,12 +36,12 @@ const Chats = () => {
                 <Text>Sort By: </Text>
                 <Flex $flexDirection={'row'} $alignItems={"center"}>
                     <Text>Add New </Text>
-                    <AddButton>+</AddButton>
+                    <AddButton onClick={() => setIsOpen((prev) => !prev)}>+</AddButton>
                 </Flex>
             </ChatSelectorContainer>
             <ChatCardWrapper>
-                {users.map(user => (
-                    <ChatCard key={user.id} width={'25vw'} user={user} />
+                {chats.map(chat => (
+                    <ChatCard key={chat.id} width={'25vw'} chat={chat}/>
                 ))}
             </ChatCardWrapper>
         </ChatsWrapper>

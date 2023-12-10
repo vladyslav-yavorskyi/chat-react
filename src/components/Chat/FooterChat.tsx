@@ -3,15 +3,42 @@ import Input from "../StyledComponents/Input.tsx";
 import styled from "styled-components";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faIcons} from "@fortawesome/free-solid-svg-icons/faIcons";
+import {useState} from "react";
+import {addDoc, collection} from "firebase/firestore";
+import {db} from "../../firebase/firestore.ts";
+import {useCurrentConversation} from "../../context/CurrentConversationContext.tsx";
+import {useFirebase} from "../../context/FirebaseContext.tsx";
 
 const FooterChat = () => {
+
+    const [message, setMessage] = useState<string>('');
+    const {user} = useFirebase();
+
+    const {state} = useCurrentConversation();
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setMessage(event.target.value);
+    };
+
+    const sendMessage = async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        event.preventDefault();
+
+        // Add a new document with a generated id to the 'messages' collection
+        const messagesCollection = collection(db, 'conversations', state.chat?.id as string, 'messages' );
+        await addDoc(messagesCollection, { text: message, sender: user?.uid, timestamp: Date.now() });
+        console.log('Message sent!')
+        // Clear the input field
+        setMessage('');
+    };
+
+
     return (
         <Flex $justifyContent={"space-between"} $alignItems={"center"} $margin={'10px'}>
             <Input text={"Type a message..."} logo={'src/assets/paperclip.svg'}
-                   change={() => null} click={() => null}/>
+                   width={"70vw"}   value={message}
+                   change={handleInputChange} click={() => null}/>
 
             <StyledIcon icon={faIcons} />
-            <SendMessageButton>
+            <SendMessageButton onClick={sendMessage}>
                 <SendIcon src={'src/assets/paper.svg'} alt={'send'}/>
             </SendMessageButton>
         </Flex>

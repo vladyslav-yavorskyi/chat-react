@@ -2,23 +2,47 @@ import styled from "styled-components";
 import ImageProfile from "../StyledComponents/ImageProfile.tsx";
 import Status from "../StyledComponents/Status.tsx";
 import Flex from "../StyledComponents/Flex.tsx";
-import {IUser} from "../GoogleButton/GoogleSignInButton.tsx";
 import {useCurrentConversation} from "../../context/CurrentConversationContext.tsx";
+import {useEffect, useState} from "react";
+import {collection, getDocs} from "firebase/firestore";
+import {db} from "../../firebase/firestore.ts";
+import {useFirebase} from "../../context/FirebaseContext.tsx";
+import {IUser} from "../GoogleButton/GoogleSignInButton.tsx";
+import {IChat} from "./Chats.tsx";
 
-const ChatCard = ({width, user}: {width: string, user: IUser}) => {
+const ChatCard = ({width, chat}: {width: string, chat: IChat}) => {
 
-    const { dispatch} = useCurrentConversation();
+    const [coInterlocutor, setCoInterlocutor] = useState<IUser>({} as IUser);
+    const {dispatch} = useCurrentConversation();
+    const {user} = useFirebase();
+
+    useEffect( () => {
+        const getUser = async () => {
+            const coInterlocutorId = chat.participants.filter(member => member !== user?.uid)[0];
+            const userConversations =  collection(db, 'users',);
+
+            try {
+                const querySnapshot = await getDocs(userConversations);
+                const results = querySnapshot.docs.map(doc => doc.data()).filter((doc) => doc.id === coInterlocutorId);
+                setCoInterlocutor(results[0] as IUser);
+            } catch (error) {
+                console.error('Error retrieving users from Firestore: ', error);
+            }
+
+        };
+        getUser();
+    }, [chat, user?.uid]);
 
     const handleClick = () => {
-        dispatch({type: 'SET_CONVERSATION', payload: {id: user.id}})
+        dispatch({type: 'SET_CONVERSATION', payload: {chat, coInterlocutor: coInterlocutor}})
     }
 
     return (
         <CardWrapper width={width} onClick={() => handleClick()}>
             <CardHeader>
-                <ImageProfile imageUrl={user.photoUrl} active={false} size={"50px"}/>
+                <ImageProfile imageUrl={coInterlocutor.photoUrl} active={false} size={"50px"}/>
                 <Flex $flexDirection={'column'}>
-                    <CardTitle>{user.name}</CardTitle>
+                    <CardTitle>{coInterlocutor.name}</CardTitle>
                     <Status text={'Offline'}/>
                 </Flex>
             </CardHeader>

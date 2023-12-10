@@ -1,12 +1,14 @@
 import {IMessage} from "../Chat/BodyChat.tsx";
 import styled from "styled-components";
 import Flex from "./Flex.tsx";
+import {useFirebase} from "../../context/FirebaseContext.tsx";
 
 const Message = ({data}: { data: IMessage }) => {
+    const {user} = useFirebase();
     return (
         <MessageWrapper $sender={data.sender}>
-            <MessageStyle $sender={data.sender}>
-                {data.message}
+            <MessageStyle $sender={ data.sender === user?.uid ? 'You' : 'co-interlocutor'}>
+                {data.text}
             </MessageStyle>
         </MessageWrapper>
     );

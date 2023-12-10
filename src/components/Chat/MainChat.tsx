@@ -6,10 +6,11 @@ import {useCurrentConversation} from "../../context/CurrentConversationContext.t
 
 const MainChat = () => {
     const {state} = useCurrentConversation();
+    console.log(state)
 
     return (
         <>
-            {state.id ? (
+            {state.chat ? (
                 <ChatWrapper>
                     <HeaderChat />
                     <BodyChat />

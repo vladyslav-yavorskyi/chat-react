@@ -1,7 +1,10 @@
 import { createContext, useContext, useReducer, ReactNode, Dispatch } from 'react';
+import {IChat} from "../components/Conversations/Chats.tsx";
+import {IUser} from "../components/GoogleButton/GoogleSignInButton.tsx";
 
 interface ConversationState {
-    id: string | null;
+    chat: IChat | null;
+    coInterlocutor?: IUser;
 }
 
 type UserAction = { type: 'SET_CONVERSATION'; payload: ConversationState } | { type: 'CLEAN_CONVERSATION' };
@@ -15,16 +18,16 @@ const ConversationContext = createContext<{ state: ConversationState; dispatch: 
 const userReducer = (state: ConversationState, action: UserAction): ConversationState => {
     switch (action.type) {
         case 'SET_CONVERSATION':
-            return { ...state, id: action.payload.id };
+            return { ...state, chat: action.payload.chat, coInterlocutor: action.payload.coInterlocutor };
         case 'CLEAN_CONVERSATION':
-            return { ...state, id: null };
+            return { ...state, chat: null };
         default:
             return state;
     }
 };
 
 const ConversationProvider = ({ children }: UserContextProps) => {
-    const [state, dispatch] = useReducer(userReducer, { id: null });
+    const [state, dispatch] = useReducer(userReducer, { chat: null, coInterlocutor: undefined });
 
     return (
         <ConversationContext.Provider value={{ state, dispatch }}>

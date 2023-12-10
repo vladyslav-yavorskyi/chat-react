@@ -6,14 +6,15 @@ interface InputProps {
     logo: string;
     text: string;
     click: () => void;
-    change: () => void;
+    change: (event: React.ChangeEvent<HTMLInputElement>) => void;
     width?: string;
+    value: string;
 }
-const Input = ({logo, text, click, change, width}: InputProps) => {
+const Input = ({logo, text, click, change, width, value}: InputProps) => {
     return (
         <ContainerStyled width={width as string}>
             <IconStyled onClick={() => click()} src={logo} alt="icon" />
-            <InputStyled as="input" onChange={() => change()} placeholder={text} />
+            <InputStyled as="input" value={value} onChange={change} placeholder={text} />
         </ContainerStyled>
     )
 };
